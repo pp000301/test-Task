@@ -7,10 +7,10 @@ import java.util.regex.Pattern;
 
 public class LockersValidator {
 
-    private char lockCharacter = '{';
-    private char unlockCharacter = '}';
-    private String inputValidationRegex = "\\{.+?\\}+";
-    private String maxLockerExtractRegex = "\\{.+\\}";
+    private static char lockCharacter = '{';
+    private static char unlockCharacter = '}';
+    private static String inputValidationRegex = "\\{.+?\\}+";
+    private static String maxLockerExtractRegex = "\\{.+\\}";
 
     /**
      * @description Validation of input String
@@ -19,7 +19,7 @@ public class LockersValidator {
      * @param input The source String expression
      * @return  Return validate  Set<String>
      */
-    public Set<String> validate(String input) {
+    public static Set<String> validate(String input) {
 
         long lockCount, unlockCount;
         int numberOfRedundantLockers, excessLockerCount;
@@ -39,6 +39,7 @@ public class LockersValidator {
         Matcher matcher = pattern.matcher(input);
 
         if (matcher.find() == false) {
+            resultSet.add("");
             return resultSet;
         } else {
 
@@ -83,7 +84,7 @@ public class LockersValidator {
      * @param params ValidationParams instance to include all necessary validation parameters
      * @return Set<String> Result set of strings that contain
      */
-    private Set<String> validateString(ValidationParams params) {
+    private static Set<String> validateString(ValidationParams params) {
 
         Set<String> result = new HashSet<>();
         String prefix="";
@@ -121,13 +122,13 @@ public class LockersValidator {
     }
 
     // get count char in string
-    private long getCountChar(String input, char c) {
+    private static long getCountChar(String input, char c) {
         return input.chars().filter(ch -> ch == c).count();
     }
 
 
     // get indexs char in string
-    private List<Integer> indexsChar(String str, Character character) {
+    private static List<Integer> indexsChar(String str, Character character) {
         List<Integer> interimArray1 = new ArrayList<>();
         int l = 0;
         for (int k = 0; k < str.length(); k++) {
@@ -143,12 +144,12 @@ public class LockersValidator {
 
     /**
      * @description Generate combinations from m at n remove the extra characters
-     * @param arr
+     * @param arr Intermediate collection
      * @param m
      * @param n
      * @return List combinations
      */
-    private List<Integer> generateCombinations(List<Integer> arr, int m, int n) {
+    private static List<Integer> generateCombinations(List<Integer> arr, int m, int n) {
         if (arr == null) {
             arr = new ArrayList<>();
             for (int i = 0; i < m; i++)
@@ -166,7 +167,7 @@ public class LockersValidator {
     }
 
     // isLockUnlockCharsEquals
-    private boolean isLockUnlockCharsEquals(String input){
+    private static boolean isLockUnlockCharsEquals(String input){
 
         boolean isInputValid = false;
 
@@ -188,7 +189,7 @@ public class LockersValidator {
 
 
     // inner class with validation params
-    private class ValidationParams
+    private static class ValidationParams
     {
         public String input;
         public List<Integer> redundantLockersIndexes;

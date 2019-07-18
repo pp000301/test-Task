@@ -4,12 +4,13 @@ public class Main {
 
     public static void main(String[] args) {
         Set<String> resultSet;
-        String text = "{cc}}{x}}x}asa";
-
-        LockersValidator validator = new LockersValidator();
-        resultSet = validator.validate(text);
+        String text = "asas{ccc{cc{cc}}sdff";
+        resultSet = LockersValidator.validate(text);
+        System.out.println(resultSet.size());
         for (String result : resultSet) {
             System.out.println(result);
         }
+
+
     }
 }
